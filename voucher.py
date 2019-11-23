@@ -10,7 +10,14 @@ _OUTPUT_FIELD_NAMES = ['customer', 'net_worth', 'voucher']
 @click.argument('input_file', type=click.File())
 @click.argument('output_file', type=click.File(mode='w'))
 def cli(input_file, output_file):
-    """Main application that calculates vouchers per customer"""
+    """Calculate vouchers for each customer
+
+    This application will calculate vouchers for all customer from the order
+    input file. If a customer has multiple orders, all of them are summed up
+    to calculate the customer's net worth.
+
+    A voucher is 30% of the total net worth of each customer.
+    """
     orders = read_orders(input_file)
 
     customers = collect_customer_information(orders)
